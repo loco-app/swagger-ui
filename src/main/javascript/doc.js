@@ -134,7 +134,8 @@ var Docs = {
 		$('li#resource_' + resource).addClass('active');
 
 		var elem = $('li#resource_' + resource + ' ul.endpoints');
-		elem.slideDown();
+		elem.slideDown()
+            .trigger('swgExpandResource', [ resource ] );
 	},
 
 	// Collapse resource and mark as explicitly closed
@@ -143,7 +144,8 @@ var Docs = {
 		$('li#resource_' + resource).removeClass('active');
 
 		var elem = $('li#resource_' + resource + ' ul.endpoints');
-		elem.slideUp();
+		elem.slideUp()
+            .trigger('swgCollapseResource', [ resource ] );
 	},
 
 	expandOperationsForResource: function(resource) {
@@ -174,11 +176,13 @@ var Docs = {
 	},
 
 	expandOperation: function(elem) {
-		elem.slideDown();
+		elem.slideDown()
+            .trigger('swgExpandOperation', elem[0].id.split('_').slice(0,-1) );
 	},
 
 	collapseOperation: function(elem) {
-		elem.slideUp();
+		elem.slideUp()
+            .trigger('swgCollapseOperation', elem[0].id.split('_').slice(0,-1) );
 	}
 
 };

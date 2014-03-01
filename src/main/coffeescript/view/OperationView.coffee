@@ -101,6 +101,9 @@ class OperationView extends Backbone.View
       opts.requestContentType = $("div select[name=parameterContentType]", $(@el)).val()
 
       $(".response_throbber", $(@el)).show()
+
+      form.trigger('swgSubmitOperation', [ opts.parent ] );
+
       if isFileUpload
         @handleFileUpload map, form
       else
